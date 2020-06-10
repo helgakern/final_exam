@@ -20,7 +20,7 @@ export function SignUpPage(props) {
     User.create(signUpParams).then(res => {
       if (res.id) {
         onSignUp();
-        props.history.push("/questions");
+        props.history.push("/");
       }
     });
   }

@@ -15,8 +15,8 @@ function NavBar(props) {
     <div className="ui pointing menu">
       <NavLink to="/" className="item">
         <img
-          src="https://bootstraplogos.com/wp-content/uploads/edd/2018/10/logo-4.png"
-          height="30px"
+          src="https://static.thenounproject.com/png/24073-200.png"
+          height="50px"
         />
       </NavLink>
 
