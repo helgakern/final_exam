@@ -40,37 +40,71 @@ class SignUpPage extends Component {
   render() {
     return(
       <main>
-        <h1>Sign Up Page</h1>
+        <h1>Sign Up</h1>
         { Object.keys(this.state.errors).length > 0 ? (
           <div>Failed to create User</div>
         ) : null
         }
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor='firstName'>First Name</label>
-            <input type='text' name='firstName'/>
+
+        <form className="ui form" onSubmit={ this.handleSubmit }>
+          <div className="field">
+            <label htmlFor="first_name">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              id="first_name"
+              placeholder="First Name"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor='lastName'>Last Name</label>
-            <input type='text' name='lastName'/>
+          <div className="field">
+            <label htmlFor="last_name">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              id="last_name"
+              placeholder="Last Name"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor='email'>Email</label>
-            <input type='email' name='email'/>
+          <div className="field">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="email@domain.com"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor='password'>Password</label>
-            <input type='password' name='password'/>
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor='passwordConfirmation'>Confirm Password</label>
-            <input type='password' name='passwordConfirmation'/>
+          <div className="field">
+            <label htmlFor="password_confirmation">Password Confirmation</label>
+            <input
+              type="password"
+              name="password_confirmation"
+              id="password_confirmation"
+              placeholder="Enter your password again"
+              required
+            />
           </div>
-          <input type='submit' value='Create User'/>
+
+          <button className="ui button" type="submit">
+            Submit
+          </button>
         </form>
       </main>
-       )
-    }
+    )
   }
+}
   
-  export default SignUpPage
+export default SignUpPage
