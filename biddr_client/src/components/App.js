@@ -8,7 +8,7 @@ import { User, Session } from "../requests";
 import SignInPage from "./SignInPage";
 import AuctionNewPage from "./AuctionNewPage";
 import AuthRoute from "./AuthRoute";
-import { SignUpPage } from "./SignUpPage";
+import SignUpPage from "./SignUpPage";
 import NotFoundPage from "./NotFoundPage";
 import { Welcome } from "./Welcome";
 

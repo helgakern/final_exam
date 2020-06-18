@@ -1,88 +1,76 @@
-import React from "react";
+import React, { Component } from 'react';
 import { User } from "../requests";
 
-export function SignUpPage(props) {
-  const { onSignUp } = props;
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const { currentTarget } = event;
-    const fd = new FormData(currentTarget);
-
-    const signUpParams = {
-      first_name: fd.get("first_name"),
-      last_name: fd.get("last_name"),
-      email: fd.get("email"),
-      password: fd.get("password"),
-      password_confirmation: fd.get("password_confirmation")
-    };
-
-    User.create(signUpParams).then(res => {
-      if (res.id) {
-        onSignUp();
-        props.history.push("/");
-      }
-    });
+class SignUpPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: []
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  return (
-    <main>
-      <form className="ui form" onSubmit={handleSubmit}>
-        <div className="field">
-          <label htmlFor="first_name">First Name</label>
-          <input
-            type="text"
-            name="first_name"
-            id="first_name"
-            placeholder="First Name"
-            required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="last_name">Last Name</label>
-          <input
-            type="text"
-            name="last_name"
-            id="last_name"
-            placeholder="Last Name"
-            required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="email@domain.com"
-            required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="password_confirmation">Password Confirmation</label>
-          <input
-            type="password"
-            name="password_confirmation"
-            id="password_confirmation"
-            placeholder="Enter your password again"
-            required
-          />
-        </div>
+  handleSubmit(event) {
+    event.preventDefault();
+    const { currentTarget } = event;
+    const formData = new FormData(currentTarget);
+    const params = {
+      user: {
+        first_name: formData.get('firstName'),
+        last_name: formData.get('lastName'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        password_confirmation: formData.get('passwordConfirmation')
+      }
+    }
+    User.create(params)
+      .then(data => {
+        if (data.status === 422) {
+          this.setState((state) => {
+            return {
+              errors: data.errors
+            }
+          })
+        } else {
+          this.props.history.push('/sign_in', 'hello')
+        }
+      })
+  }
 
-        <button className="ui button" type="submit">
-          Submit
-        </button>
-      </form>
-    </main>
-  );
-}
+  render() {
+    return(
+      <main>
+        <h1>Sign Up Page</h1>
+        { Object.keys(this.state.errors).length > 0 ? (
+          <div>Failed to create User</div>
+        ) : null
+        }
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <label htmlFor='firstName'>First Name</label>
+            <input type='text' name='firstName'/>
+          </div>
+          <div>
+            <label htmlFor='lastName'>Last Name</label>
+            <input type='text' name='lastName'/>
+          </div>
+          <div>
+            <label htmlFor='email'>Email</label>
+            <input type='email' name='email'/>
+          </div>
+          <div>
+            <label htmlFor='password'>Password</label>
+            <input type='password' name='password'/>
+          </div>
+          <div>
+            <label htmlFor='passwordConfirmation'>Confirm Password</label>
+            <input type='password' name='passwordConfirmation'/>
+          </div>
+          <input type='submit' value='Create User'/>
+        </form>
+      </main>
+       )
+    }
+  }
+  
+  export default SignUpPage
