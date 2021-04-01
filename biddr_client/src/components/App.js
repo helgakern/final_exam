@@ -44,9 +44,11 @@ class App extends React.Component {
         this.setState({ loading: false });
       });
   };
+
   componentDidMount() {
     this.getUser();
   }
+  
   render() {
     const { loading, currentUser } = this.state;
     if (loading) {

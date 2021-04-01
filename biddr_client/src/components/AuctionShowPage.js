@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import AuctionDetails from "./AuctionDetails";
 import { BidList } from "./BidList";
 import { Auction, Bid, Publish, Reserve } from "../requests";

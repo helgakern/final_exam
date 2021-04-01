@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Auction } from "../requests";
 import NewAuctionForm from "./NewAuctionForm";
 
